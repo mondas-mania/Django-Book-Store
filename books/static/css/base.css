@@ -55,7 +55,7 @@ table th, table td {
 }
 
 tbody tr:nth-child(odd) {
-    background:#efefef;
+    background:#7c263a;
 }
 
 tbody tr.subtotal {
@@ -101,7 +101,7 @@ form p input {
     margin-bottom:10px;
     padding:10px 12px;
     border:0;
-    background:#efefef;
+    background:#7c263a;
     color:#666;
     border-radius:4px;
 }
@@ -169,7 +169,7 @@ ul.errorlist {
 }
 
 #sidebar ul li.selected {
-    background:#5993bb;
+    background:#7c263a;
     border-radius:4px;
 }
 
@@ -228,7 +228,7 @@ ul.errorlist {
 .order-info {
     float:right;
     width:300px;
-    background:#efefef;
+    background:#7c263a;
     padding:10px 20px;
     color:#333;
     border-bottom:4px solid #5993bb;
