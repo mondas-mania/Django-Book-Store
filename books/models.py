@@ -25,6 +25,9 @@ class Genre(models.Model):
     def get_absolute_url(self):
         return reverse('books:book_list_by_genre', args=[self.slug])
 
+    def get_capitalised_name(self):
+        return self.genre.capitalize()
+
 class Book(models.Model):
     genre = models.ForeignKey(Genre, related_name='books')
     title = models.CharField(max_length = 100, db_index=True)

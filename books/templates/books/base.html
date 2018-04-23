@@ -10,7 +10,20 @@
     <div id="header">
         <a href="/" class="logo">My store</a>
     </div>
-    <!-- <div id="subheader">
+    <div id="subheader">
+
+        <div class="userinfo">
+            <a href="{% url "order:order_create" %}" class="button">Checkout</a>
+            <a href="{% url "cart:cart_detail" %}" class="button">Cart</a>
+            {% if user.is_authenticated %}
+                Welcome, {{ user.get_full_name }}!
+                <a href="{% url "account:logout" %}">Logout</a>
+            {% else %}
+                Welcome, Guest!
+                <a href="{% url "account:login" %}">Login</a>
+                <a href="{% url "account:signup" %}">Sign Up</a>
+            {% endif %}
+        </div>
         <div class="cart">
             {% with total_items=cart|length %}
                 {% if cart|length > 0 %}
@@ -23,7 +36,7 @@
                 {% endif %}
             {% endwith %}
         </div>
-    </div> -->
+    </div>
     <div id="content">
         {% block content %}
         {% endblock %}

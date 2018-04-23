@@ -55,7 +55,7 @@ table th, table td {
 }
 
 tbody tr:nth-child(odd) {
-    background:#7c263a;
+    background:#267729;
 }
 
 tbody tr.subtotal {
@@ -135,6 +135,11 @@ ul.errorlist {
     color:#333;
     font-size:22px;
     margin-right:10%;
+}
+
+#subheader.userinfo {
+    float:right;
+    padding-top:4px;
 }
 
 #subheader .cart {

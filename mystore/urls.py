@@ -9,6 +9,9 @@ urlpatterns = [
 #    url(r'^cart/', include('cart.urls', namespace='cart')),
 #    url(r'^orders/', include('orders.urls', namespace='orders')),
     url(r'^', include('books.urls', namespace='books')),
+    url(r'^account/', include('account.urls', namespace='account')),
+    url(r'^cart/', include('cart.urls', namespace='cart')),
+    url(r'^order/', include('order.urls', namespace='order')),
 ]
 
 if settings.DEBUG:
