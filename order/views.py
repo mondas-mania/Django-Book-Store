@@ -22,8 +22,8 @@ def order_create(request):
                                          book=item['book'],
                                          price=item['price'],
                                          quantity=item['quantity'])
+			cart.clear()
 			return render(request, 'order/order/created.html',{'order':order})
-
 		else:
 			return render(request, 'order/order/create.html',{'form': form})			
 	else:

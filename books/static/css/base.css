@@ -125,7 +125,7 @@ ul.errorlist {
 #subheader {
     background:#ececec;
     color:#444;
-    padding:15px 100px;
+    padding:15px 20px;
     overflow:auto;
 }
 
@@ -137,14 +137,10 @@ ul.errorlist {
     margin-right:10%;
 }
 
-#subheader.userinfo {
-    float:right;
-    padding-top:4px;
-}
-
 #subheader .cart {
-    float:right;
     padding-top:4px;
+    float:right;
+    text-align: right;
 }
 
 #content {
@@ -204,6 +200,11 @@ ul.errorlist {
 
 .product-detail {
     text-align:justify;
+}
+
+.mini-img {
+    width:60px;
+    height:100px;
 }
 
 .product-detail .price {

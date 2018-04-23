@@ -26,3 +26,15 @@ class OrderCreateForm(forms.ModelForm):
 			raise ValidationError('Card must contain 16 digits')
 		
 		return card_number
+
+
+	def clean_CVV_code(self):
+		CVV = self.cleaned_data['CVV_code']
+
+		if not CVV.isdigit():
+			raise forms.ValidationError("CVV code can only contain numbers")
+
+		elif len(CVV) != 3:
+			raise ValidationError("CVV code must contain 3 digits")
+
+		return CVV

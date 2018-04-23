@@ -11,6 +11,7 @@ Checkout
     <h3>Your order</h3>
     <ul>
         {% for item in cart %}
+        <img class="mini-img" src="{% if item.book.image %}{{ item.book.image.url }}{% else %}"{% endif %}">
         <li>{{ item.quantity }} x {{ item.book.title }} <span>£{{ item.total_price }}</span></li>
         {% endfor %}
     </ul>
@@ -21,7 +22,12 @@ Checkout
 
     <h3>Your order will be delivered to:</h3>
 
-    <p>{{ user.first_name }} {{ user.last_name }}</p>
+    <p>
+        {{ user.first_name }} {{ user.last_name }}<br>
+        {{ user.profile.address }}<br>
+        {{ user.profile.city }}<br>
+        {{ user.profile.postcode }}
+    </p>
 
     <h3>Payment details:</n3>
         <form action="." method="post">

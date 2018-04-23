@@ -12,6 +12,11 @@
         <h2><a href="{{ book.genre.get_absolute_url }}">{{ book.genre }}</a></h2>
         <p class="price">£{{ book.price }}</p>
         {{ book.description|linebreaks }}
+        <form method="post" action="{% url "cart:cart_add" book.id %}">
+			{% csrf_token %}
+			{{ cart_book_form }}
+			<input type="submit" value="Add to Cart">
+		</form>
     </div>
 {% endblock %}
 
