@@ -5,16 +5,25 @@ Checkout
 {% endblock %}
 
 {% block content %}
+
 <h1>Checkout</h1>
 
 <div class="order-info">
     <h3>Your order</h3>
-    <ul>
+    <table>
+        <col width="20%">
+        <col width="80%">
         {% for item in cart %}
-        <img class="mini-img" src="{% if item.book.image %}{{ item.book.image.url }}{% else %}"{% endif %}">
-        <li>{{ item.quantity }} x {{ item.book.title }} <span>£{{ item.total_price }}</span></li>
+        <tr>
+            <td class="mini-img-td">
+                <img class="mini-img" src="{% if item.book.image %}{{ item.book.image.url }}{% endif %}">
+            </td>
+            <td class="book-info-td">
+                {{ item.quantity }} x {{ item.book.title }} <span>£{{ item.total_price }}</span>
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
     <p>Total: £{{ cart.get_total_price }}</p>
 </div>
 

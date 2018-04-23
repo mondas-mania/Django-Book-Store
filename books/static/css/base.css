@@ -203,8 +203,8 @@ ul.errorlist {
 }
 
 .mini-img {
-    width:60px;
-    height:100px;
+    float:left;
+    width: 80%;
 }
 
 .product-detail .price {
@@ -245,7 +245,11 @@ ul.errorlist {
     color:#5993bb;
 }
 
-.order-info ul li {
+.order-info table {
+    table-layout: auto;
+}
+
+.order-info td .book-info-td {
     margin:0;
     padding:0;
     font-size:14px;
