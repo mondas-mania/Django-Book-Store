@@ -54,8 +54,12 @@ table th, table td {
     margin:0;
 }
 
-tbody tr:nth-child(odd) {
-    background:#267729;
+.book-list tbody tr:nth-child(odd) td:nth-child(odd), .book-list tbody tr:nth-child(even) td:nth-child(even) {
+    background:#7c263a;
+}
+
+.book-list tbody tr:nth-child(even) td:nth-child(odd), .book-list tbody tr:nth-child(odd) td:nth-child(even) {
+    background:#8C2B45;
 }
 
 tbody tr.subtotal {
@@ -185,7 +189,7 @@ ul.errorlist {
     overflow:hidden;
 }
 
-.product-list .item {
+.book-list .item {
     width:25%;
     padding:10px 20px 10px 0;
     float:left;
@@ -193,12 +197,13 @@ ul.errorlist {
     line-height:1.2;
 }
 
-.product-list .item img {
-    width:100%;
+.book-list .item img {
+    width:275px;
+    height: 450px;
     margin-bottom:8px;
 }
 
-.product-detail {
+.book-detail {
     text-align:justify;
 }
 
@@ -207,23 +212,23 @@ ul.errorlist {
     width: 80%;
 }
 
-.product-detail .price {
+.book-detail .price {
     color:#333;
     font-size:28px;
     font-weight:bold;
 }
 
-.product-detail img {
+.book-detail img {
     width:40%;
     float:left;
     padding:0 20px 20px 0;
 }
 
-.product-detail h1 {
+.book-detail h1 {
     margin-bottom:0;
 }
 
-.product-detail h2 {
+.book-detail h2 {
     margin-top:10px;
 }
 
@@ -236,13 +241,13 @@ ul.errorlist {
     width:300px;
     background:#7c263a;
     padding:10px 20px;
-    color:#333;
+    color:#fff;
     border-bottom:4px solid #5993bb;
 }
 
 
 .order-info h3 {
-    color:#5993bb;
+    color:#fff;
 }
 
 .order-info table {

@@ -21,15 +21,27 @@
     </div>
     <div id="main" class="book-list">
         <h1>{% if genre %}{{ genre.get_capitalised_name }}{% else %}Books{% endif %}</h1>
-        {% for book in books %}
-            <div class="item">
-                <h4><strong>{{ book.title }}</strong></h4>
-                <a href="{{ book.get_absolute_url }}">
-                    <img src="{% if book.image %}{{ book.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                </a>
-                <a href="{{ book.get_absolute_url }}">{{ book.name }}</a><br>
-                £{{ book.price }}
-            </div>
-        {% endfor %}
+        <table>
+            <tr>
+            {% for book in books reversed %}
+                {% if forloop.counter0|divisibleby:3 and forloop.counter0 is not 0 %}
+                </tr><tr>
+                {% endif %}
+                <td class="item">
+                    <h4><strong>{{ book.title }}</strong></h4>
+                    <a href="{{ book.get_absolute_url }}">
+                        <img src="{% if book.image %}{{ book.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                    </a>
+                    <a href="{{ book.get_absolute_url }}">{{ book.name }}</a><br>
+                    £{{ book.price }}
+                    <!--<form method="post" action="{% url "cart:cart_add" book.id %}">
+                        {% csrf_token %}
+                        {{ cart_book_form }}
+                        <input type="submit" value="Add to Cart">
+                    </form>-->
+                </td>
+            {% endfor %}
+            </tr>
+        </table>
     </div>
 {% endblock %}

@@ -7,12 +7,14 @@ def book_list(request, genre_slug=None):
     genre = None
     genres = Genre.objects.all()
     books = Book.objects.filter(available=True)
+    cart_book_form = CartAddProductForm()
     if genre_slug:
         genre = get_object_or_404(Genre, slug=genre_slug)
         books = books.filter(genre=genre)
     return render(request, 'books/book/list.html', {'genre': genre,
                                                       'genres': genres,
-                                                      'books': books})
+                                                      'books': books,
+                                                      'cart_book_form': cart_book_form})
 
 
 def book_detail(request, id, slug):

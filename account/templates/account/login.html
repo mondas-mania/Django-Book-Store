@@ -11,6 +11,7 @@
 		{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Login">
+		<!-- https://stackoverflow.com/questions/806835/django-redirect-to-previous-page-after-login-->
 	</form>
 
 {% endblock %}
