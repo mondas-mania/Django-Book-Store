@@ -8,7 +8,7 @@ class Developer(models.Model):
     slug = models.SlugField(max_length=30, db_index = True)
 
     def __str__(self):
-        return '%s %s' % (self.name)
+        return '%s' % (self.name)
 
 class Genre(models.Model):
     genre = models.CharField(max_length = 50)
@@ -29,11 +29,11 @@ class Genre(models.Model):
         return self.genre.capitalize()
 
 class Game(models.Model):
-    genre = models.ForeignKey(Genre, related_name='books')
+    genre = models.ForeignKey(Genre, related_name='games')
     title = models.CharField(max_length = 100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
-    developers = models.ForeignKey(Author)
-#   image = models.ImageField(upload_to='books/%Y/%m/%d', blank=True)
+    developers = models.ForeignKey(Developer)
+#   image = models.ImageField(upload_to='games/%Y/%m/%d', blank=True)
     image = models.ImageField(upload_to='games/games_img', blank=True)
     description = models.TextField(blank = True, null = True)
     release_date = models.DateField()

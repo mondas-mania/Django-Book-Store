@@ -7,7 +7,9 @@
 
 {% block content %}
     <div id="sidebar">
-        <h3>Genres</h3>
+        <a href="{% url "home:product_list" %}"><h3>Product Types</h3></a>
+        <a href="{% url "books:book_list" %}"><h3>Books</h3></a>
+        <h3>Games</h3>
         <ul>
             <li {% if not genre %}class="selected"{% endif %}>
                 <a href="{% url "games:game_list" %}">All</a>
@@ -34,11 +36,6 @@
                     </a>
                     <a href="{{ game.get_absolute_url }}">{{ game.name }}</a><br>
                     £{{ game.price }}
-                    <!--<form method="post" action="{% url "cart:cart_add" book.id %}">
-                        {% csrf_token %}
-                        {{ cart_game_form }}
-                        <input type="submit" value="Add to Cart">
-                    </form>-->
                 </td>
             {% endfor %}
             </tr>

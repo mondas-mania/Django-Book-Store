@@ -7,12 +7,12 @@
 
 {% block content %}
     <div class="book-detail">
-        <img src="{% if book.image %}{{ book.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-        <h1>{{ book.name }}</h1>
-        <h2><a href="{{ book.genre.get_absolute_url }}">{{ book.genre }}</a></h2>
-        <p class="price">£{{ book.price }}</p>
-        {{ book.description|linebreaks }}
-        <form method="post" action="{% url "cart:cart_add" book.id %}">
+        <img src="{% if game.image %}{{ game.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        <h1>{{ game.name }}</h1>
+        <h2><a href="{{ game.genre.get_absolute_url }}">{{ game.genre }}</a></h2>
+        <p class="price">£{{ game.price }}</p>
+        {{ game.description|linebreaks }}
+        <form method="post" action="{% url "cart:cart_game_add" book.id %}">
 			{% csrf_token %}
 			{{ cart_game_form }}
 			<input type="submit" value="Add to Cart">

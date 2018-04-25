@@ -2,27 +2,18 @@
 {% load static %}
 
 {% block title %}
-    {% if genre %}{{ genre.get_capitalised_name }}{% else %}Books{% endif %}
+    Homepage
 {% endblock %}
 
 {% block content %}
     <div id="sidebar">
-        <a href="{% url "home:product_list" %}"><h3>Product Types</h3></a>
-        <h3>Books</h3>
-        <ul>
-            <li {% if not genre %}class="selected"{% endif %}>
-                <a href="{% url "books:book_list" %}">All</a>
-            </li>
-        {% for c in genres %}
-            <li {% if genre.slug == c.slug %}class="selected"{% endif %}>
-                <a href="{{ c.get_absolute_url }}">{{ c.get_capitalised_name }}</a>
-            </li>
-        {% endfor %}
-        </ul>
+        <h3>Product Types</h3>
+        <a href="{% url "books:book_list" %}"><h3>Books</h3></a>
         <a href="{% url "games:game_list" %}"><h3>Games</h3></a>
     </div>
     <div id="main" class="book-list">
-        <h1>{% if genre %}{{ genre.get_capitalised_name }}{% else %}Books{% endif %}</h1>
+        <h1>All Products</h1>
+        <h2>Books</h2>
         <table>
             <tr>
             {% for book in books reversed %}
@@ -36,11 +27,24 @@
                     </a>
                     <a href="{{ book.get_absolute_url }}">{{ book.name }}</a><br>
                     £{{ book.price }}
-                    <!--<form method="post" action="{% url "cart:cart_book_add" book.id %}">
-                        {% csrf_token %}
-                        {{ cart_book_form }}
-                        <input type="submit" value="Add to Cart">
-                    </form>-->
+                </td>
+            {% endfor %}
+            </tr>
+        </table>
+        <h2>Games</h2>
+        <table>
+            <tr>
+            {% for game in games reversed %}
+                {% if forloop.counter0|divisibleby:3 and forloop.counter0 is not 0 %}
+                </tr><tr>
+                {% endif %}
+                <td class="item">
+                    <h4><strong>{{ game.title }}</strong></h4>
+                    <a href="{{ game.get_absolute_url }}">
+                        <img src="{% if game.image %}{{ game.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                    </a>
+                    <a href="{{ game.get_absolute_url }}">{{ game.name }}</a><br>
+                    £{{ game.price }}
                 </td>
             {% endfor %}
             </tr>

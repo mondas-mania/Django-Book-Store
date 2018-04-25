@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from books.models import Book
+from games.models import Game
 
 
 class Cart(object):
