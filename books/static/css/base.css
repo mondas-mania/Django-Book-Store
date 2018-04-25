@@ -1,9 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
 
+html {
+    height: 100%;
+}
+
 body { 
     margin:0;
     padding:0;
     font-family:helvetica, sans-serif; 
+    height:100%;
 }
 
 h1, h2, h3, h4, h5 , h6 { 
@@ -52,14 +57,6 @@ table th, table td {
     font-size:14px;
     padding:10px;
     margin:0;
-}
-
-.book-list tbody tr:nth-child(odd) td:nth-child(odd), .book-list tbody tr:nth-child(even) td:nth-child(even) {
-    background:#7c263a;
-}
-
-.book-list tbody tr:nth-child(even) td:nth-child(odd), .book-list tbody tr:nth-child(odd) td:nth-child(even) {
-    background:#8C2B45;
 }
 
 tbody tr.subtotal {
@@ -149,6 +146,7 @@ ul.errorlist {
 
 #content {
     padding:0 100px;
+    padding-bottom: 65px;
     overflow:hidden;
 }
 
@@ -189,7 +187,29 @@ ul.errorlist {
     overflow:hidden;
 }
 
-.book-list .item {
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#footer {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align:center;
+    margin-top: 15px;
+    background:#ececec;
+    color:#444;
+    padding:15px 20px;
+}
+
+.info-page {
+    text-align: center;
+}
+
+.product-list .item {
     width:25%;
     padding:10px 20px 10px 0;
     float:left;
@@ -197,18 +217,38 @@ ul.errorlist {
     line-height:1.2;
 }
 
-.book-list .item img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.product-list .item img {
+    margin-bottom:8px;
     width:275px;
     max-width: 95%;
     height: 450px;
-    margin-bottom:8px;
 }
 
-.book-detail {
-    text-align:justify;
+.product-type {
+    float:left;
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.product-type .item:nth-child(odd) {
+    background:#7c263a;
+}
+
+.product-type .item:nth-child(even) {
+    background:#8C2B45;
+}
+
+.book-list tbody tr:nth-child(odd) td:nth-child(odd), .book-list tbody tr:nth-child(even) td:nth-child(even) {
+    background:#7c263a;
+}
+
+.book-list tbody tr:nth-child(even) td:nth-child(odd), .book-list tbody tr:nth-child(odd) td:nth-child(even) {
+    background:#8C2B45;
+}
+
+.product-type h2 {
+    margin: 30px 0 0 0;
 }
 
 .mini-img {
@@ -216,13 +256,17 @@ ul.errorlist {
     width: 80%;
 }
 
-.book-detail .price {
+.product-detail {
+    text-align:justify;
+}
+
+.product-detail .price {
     color:#333;
     font-size:28px;
     font-weight:bold;
 }
 
-.book-detail img {
+.product-detail img {
     max-height: 700px;
     min-width: 30%;
     max-width: 40%;
@@ -230,11 +274,11 @@ ul.errorlist {
     padding:0 20px 20px 0;
 }
 
-.book-detail h1 {
+.product-detail h1 {
     margin-bottom:0;
 }
 
-.book-detail h2 {
+.product-detail h2 {
     margin-top:10px;
 }
 

@@ -28,7 +28,7 @@ Checkout
 </div>
 
 <div style="float:left;">
-	<h3>Please <a href="{% url "account:login" %}">log in</a> or <a href="{% url "account:signup" %}">register</a> to complete your order.</h3>    
+	<h3>Please <a href="{% url "account:login" %}?next={{request.path}}">log in</a> or <a href="{% url "account:signup" %}?next={{request.path}}">register</a> to complete your order.</h3>    
 
 </div>
 

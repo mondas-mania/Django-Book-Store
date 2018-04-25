@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from books.models import Book
 from games.models import Game
+from cart.forms import CartAddProductForm
 
 from .forms import SignUpForm
 
@@ -13,5 +14,13 @@ def go_books(request):
 def product_list(request):
 	books = Book.objects.filter(available=True)
 	games = Game.objects.filter(available=True)
+	cart_book_form = CartAddProductForm()
 	return render(request, 'home/list.html', {'games': games,
-												'books': books})
+												'books': books,
+												'cart_book_form': cart_book_form})
+
+def terms_and_conditions(request):
+	return render(request, 'home/terms.html',{})
+
+def contact_us(request):
+	return render(request, 'home/contact.html',{})

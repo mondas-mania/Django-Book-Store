@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="book-detail">
+    <div class="product-detail">
         <img src="{% if game.image %}{{ game.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
         <h1>{{ game.name }}</h1>
         <h2><a href="{{ game.genre.get_absolute_url }}">{{ game.genre }}</a></h2>
