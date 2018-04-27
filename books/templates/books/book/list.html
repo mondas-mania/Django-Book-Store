@@ -22,28 +22,23 @@
         <a href="{% url "games:game_list" %}"><h3>Games</h3></a>
     </div>
     <div id="main" class="product-list">
-        <h1>{% if genre %}{{ genre.get_capitalised_name }}{% else %}Books{% endif %}</h1>
-        <table>
-            <tr>
+        <div class="product-type">
+            <h1>{% if genre %}{{ genre.get_capitalised_name }}{% else %}Books{% endif %}</h1>
             {% for book in books reversed %}
-                {% if forloop.counter0|divisibleby:3 and forloop.counter0 is not 0 %}
-                </tr><tr>
-                {% endif %}
-                <td class="item">
+                <div class="item">
                     <h4><strong>{{ book.title }}</strong></h4>
                     <a href="{{ book.get_absolute_url }}">
                         <img src="{% if book.image %}{{ book.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
                     </a>
                     <a href="{{ book.get_absolute_url }}">{{ book.name }}</a><br>
                     £{{ book.price }}
-                    <!--<form method="post" action="{% url "cart:cart_book_add" book.id %}">
+                    <form method="post" action="{% url "cart:cart_book_add" book.id %}">
                         {% csrf_token %}
                         {{ cart_book_form }}
                         <input type="submit" value="Add to Cart">
-                    </form>-->
-                </td>
+                    </form>
+                </div>
             {% endfor %}
-            </tr>
-        </table>
+        </div>
     </div>
 {% endblock %}

@@ -12,7 +12,7 @@ def go_books(request):
     return HttpResponseRedirect("/books/")
 
 def product_list(request):
-	books = Book.objects.filter(available=True)
+	books = Book.objects.filter(available=True)[0:3:-1]
 	games = Game.objects.filter(available=True)
 	cart_book_form = CartAddProductForm()
 	return render(request, 'home/list.html', {'games': games,

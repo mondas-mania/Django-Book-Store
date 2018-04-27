@@ -22,23 +22,18 @@
         </ul>
     </div>
     <div id="main" class="product-list">
-        <h1>{% if genre %}{{ genre.get_capitalised_name }}{% else %}Games{% endif %}</h1>
-        <table>
-            <tr>
+        <div class="product-type">
+            <h1>{% if genre %}{{ genre.get_capitalised_name }}{% else %}Games{% endif %}</h1>
             {% for game in games reversed %}
-                {% if forloop.counter0|divisibleby:3 and forloop.counter0 is not 0 %}
-                </tr><tr>
-                {% endif %}
-                <td class="item">
+                <div class="item">
                     <h4><strong>{{ game.title }}</strong></h4>
                     <a href="{{ game.get_absolute_url }}">
                         <img src="{% if game.image %}{{ game.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
                     </a>
                     <a href="{{ game.get_absolute_url }}">{{ game.name }}</a><br>
                     £{{ game.price }}
-                </td>
+                </div>
             {% endfor %}
-            </tr>
-        </table>
+        </div>
     </div>
 {% endblock %}
