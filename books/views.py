@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Genre, Book
-from games.models import Game
 from cart.forms import CartAddProductForm
 
 
@@ -8,7 +7,6 @@ def book_list(request, genre_slug=None):
     genre = None
     genres = Genre.objects.all()
     books = Book.objects.filter(available=True)
-    games = Game.objects.filter(available=True)
     cart_book_form = CartAddProductForm()
     if genre_slug:
         genre = get_object_or_404(Genre, slug=genre_slug)
@@ -16,7 +14,6 @@ def book_list(request, genre_slug=None):
     return render(request, 'books/book/list.html', {'genre': genre,
                                                       'genres': genres,
                                                       'books': books,
-                                                      'games': games,
                                                       'cart_book_form': cart_book_form})
 
 

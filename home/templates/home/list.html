@@ -9,7 +9,6 @@
     <div id="sidebar">
         <h3>Product Types</h3>
         <a href="{% url "books:book_list" %}"><h3>Books</h3></a>
-        <a href="{% url "games:game_list" %}"><h3>Games</h3></a>
     </div>
     <div id="main" class="product-list">
         <h1>All Products</h1>
@@ -28,19 +27,6 @@
                         {{ cart_book_form }}
                         <input type="submit" value="Add to Cart">
                     </form>
-                </div>
-            {% endfor %}
-        </div>
-        <div class="product-type">
-            <h2>Games</h2>
-            {% for game in games reversed %}
-                <div class="item">
-                    <h4><strong>{{ game.title }}</strong></h4>
-                    <a href="{{ game.get_absolute_url }}">
-                        <img src="{% if game.image %}{{ game.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                    </a>
-                    <a href="{{ game.get_absolute_url }}">{{ game.name }}</a><br>
-                    £{{ game.price }}
                 </div>
             {% endfor %}
         </div>

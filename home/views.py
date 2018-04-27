@@ -3,7 +3,6 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from books.models import Book
-from games.models import Game
 from cart.forms import CartAddProductForm
 
 from .forms import SignUpForm
@@ -13,10 +12,8 @@ def go_books(request):
 
 def product_list(request):
 	books = Book.objects.filter(available=True)[0:3:-1]
-	games = Game.objects.filter(available=True)
 	cart_book_form = CartAddProductForm()
-	return render(request, 'home/list.html', {'games': games,
-												'books': books,
+	return render(request, 'home/list.html', {'books': books,
 												'cart_book_form': cart_book_form})
 
 def terms_and_conditions(request):
