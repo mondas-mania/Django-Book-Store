@@ -10,27 +10,27 @@ from cart.cart import Cart
 from account.models import Profile
 
 def order_create(request):
-	cart = Cart(request)
-	if request.user.is_authenticated():
-		user_id = request.user.id
-		current_user_object = User.objects.get(id=user_id)
-		form = OrderCreateForm(request.POST)
-			
-		if form.is_valid():
-			order = form.save(commit=False)
-			order.user = current_user_object
-			order = form.save()
-			for item in cart:
-				OrderItem.objects.create(order=order,
+    cart = Cart(request)
+    if request.user.is_authenticated():
+        user_id = request.user.id
+        current_user_object = User.objects.get(id=user_id)
+        form = OrderCreateForm(request.POST)
+            
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = current_user_object
+            order = form.save()
+            for item in cart:
+                OrderItem.objects.create(order=order,
                                          book=item['book'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-			cart.clear()
-			return render(request, 'order/order/created.html',{'order':order})
-		else:
-			return render(request, 'order/order/create.html',{'form': form})			
-	else:
-		return render(request, 'order/order/create-login.html')
+            cart.clear()
+            return render(request, 'order/order/created.html',{'order':order})
+        else:
+            return render(request, 'order/order/create.html',{'form': form})            
+    else:
+        return render(request, 'order/order/create-login.html')
 
 
 def pdf(request, order_id=None):
@@ -40,19 +40,28 @@ def pdf(request, order_id=None):
     order = Order.objects.filter(id=order_id)[0]
     user = User.objects.filter(id=order.user_id)[0]
     if user != request.user:
-    	return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/")
     profile = Profile.objects.filter(user_id=user.id)[0]
 
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
 
-    # Start writing the PDF here
-    p.drawString(100, 175, "SHIP TO:")
+    p.setDash(2,2)
+    p.line(30,375,565,375)
+    p.setDash(0)
+    p.rect(30,30,535,785)
+    p.drawString(85, 350, "ORDER DATE:")
+    p.drawString(175, 350, str(order.created.strftime("%d-%m-%Y")))
+    p.drawString(85, 300, "RETURN TO:")
+    p.drawString(175, 300, "COMPUTER SCIENCE DEPARTMENT")
+    p.drawString(175, 275, "5 THE PARADE")
+    p.drawString(175, 250, "CARDIFF")
+    p.drawString(175, 225, "CF24 3AA")
+    p.drawString(85, 175, "SHIP TO:")
     p.drawString(175, 175, str(user.first_name).upper() + " " + str(user.last_name).upper())
     p.drawString(175, 150, str(profile.address).upper())
     p.drawString(175, 125, str(profile.city).upper())
     p.drawString(175, 100, str(profile.postcode).upper())
-    # End writing
 
     p.showPage()
     p.save()

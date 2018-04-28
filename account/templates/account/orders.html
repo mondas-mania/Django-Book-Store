@@ -1,0 +1,21 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}
+    Order History
+{% endblock %}
+
+{% block content %}
+    <div id="main" class="product-list">
+        <h1>Orders</h1>
+        {% for order in orders reversed %}
+            <li>Order ID {{ order.id }} - {{ order.created }}</li>
+            {% for order_info in order_info_list reversed %}
+                {% if order.id == order_info.order_id %}
+                    <ul>- {{ order_info.book.title }} x {{ order_info.quantity }}</ul>
+                {% endif %}
+            {% endfor %}
+            <a href="{% url "order:order_pdf" order_id=order.id %}"><ul>Shipping Label</ul></a><br>
+        {% endfor %}
+    </div>
+{% endblock %}
