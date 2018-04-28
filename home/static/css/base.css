@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5 , h6 {
 
 a {
     text-decoration:none;
-    color:#5993bb;
+    color:#6e95ad;
 }
 
 a:hover {
@@ -152,8 +152,14 @@ ul.errorlist {
 
 #sidebar {
     width:220px;
-    padding:30px 20px 0 0;
+    padding:30px 20px 30px 0px;
     float:left;
+}
+
+#sidebar-border {
+    border-style: solid;
+    border-width: 5px 0;
+    border-color: #7c263a;
 }
 
 #sidebar ul{
@@ -178,6 +184,32 @@ ul.errorlist {
 
 #sidebar ul li.selected a {
     color:#fff;
+}
+
+#search, #sort {
+    width: 100%;
+    border-top: solid 2px #7c263a;
+    margin: 15px 0;
+}
+
+#search input[type="submit"], #sort input[type="submit"] {
+    color:#fff;
+    background:#7c263a;
+    border-radius:4px;
+    margin-top: 10px;
+    padding:5px 10px;
+    font-size:14px;
+    border:0;
+}
+
+#search input[type="text"], #sort select {
+    margin-top: 20px;
+    font-size: 14px;
+    width:60%;
+}
+
+#search label, #sort label {
+    display: none;
 }
 
 #main {
@@ -229,6 +261,10 @@ ul.errorlist {
     display: block;
     margin-bottom: 5px;
     width: 100%;
+}
+
+.item, .item a {
+    color: #fff;
 }
 
 .product-type .item:nth-child(odd) {

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^order/', include('order.urls', namespace='order')),
     url(r'^', include('home.urls', namespace='home')),
+    url(r'^search/', include('search.urls', namespace='search')),
 ]
 
 if settings.DEBUG:

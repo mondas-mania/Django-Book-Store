@@ -6,17 +6,38 @@
 {% endblock %}
 
 {% block content %}
+
     <div id="sidebar">
-        <h3>Product Types</h3>
-        <a href="{% url "books:book_list" %}"><h3>Books</h3></a>
+        <div id="sidebar-border">
+            <h3>Home</h3>        
+            <a href="{% url "books:book_list" %}"><h3>Books</h3></a>
+            <ul>
+            <li>
+                <a href="{% url "books:book_list" %}">All</a>
+            </li>
+            {% for c in genres %}
+                <li {% if genre.slug == c.slug %}class="selected"{% endif %}>
+                    <a href="{{ c.get_absolute_url }}">{{ c.get_capitalised_name }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+            <div id="search">
+                <form method="post" action="{% url "search:search_book" %}">
+                    {% csrf_token %}
+                    {{ search_form }}
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </div>
     </div>
     <div id="main" class="product-list">
-        <h1>All Products</h1>
+
+    
         <div class="product-type">
-            <h2>Books</h2>
+            <a href="{% url "books:book_list" %}"><h1>Some books for your consideration:</h1></a>
             {% for book in books reversed %}
                 <div class="item">
-                    <h4><strong>{{ book.title }}</strong></h4>
+                    <a href="{{ book.get_absolute_url }}"><h4><strong>{{ book.title }}</strong></h4></a>
                     <a href="{{ book.get_absolute_url }}">
                         <img src="{% if book.image %}{{ book.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
                     </a>
