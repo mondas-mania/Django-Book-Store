@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from books.models import Book
 from cart.forms import CartAddProductForm
 from django.db.models import Q
+from reportlab import *
 
 
 def search_book(request):

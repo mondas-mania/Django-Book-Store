@@ -63,8 +63,4 @@ target/
 .DS_Store
 *.swp
 Include/
-Lib/
-Scripts/
-staticfiles/
-tcl/
-pip-selfcheck.json
+django/
