@@ -1,9 +1,14 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, get_object_or_404, render
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from io import BytesIO
 from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4, cm
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from .models import Order, OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
@@ -33,7 +38,7 @@ def order_create(request):
         return render(request, 'order/order/create-login.html')
 
 
-def pdf(request, order_id=None):
+def shipping_pdf(request, order_id=None):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="shipping_label.pdf"'
 
@@ -71,3 +76,45 @@ def pdf(request, order_id=None):
     response.write(pdf)
 
     return response
+
+
+def invoice_pdf(request, order_id=None):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="invoice.pdf"'
+
+    order = Order.objects.filter(id=order_id)[0]
+    order_items = OrderItem.objects.filter(order_id=order_id)
+    user = User.objects.filter(id=order.user_id)[0]
+    if user != request.user:
+        return HttpResponseRedirect("/")
+    profile = Profile.objects.filter(user_id=user.id)[0]
+
+    buffer = BytesIO()
+    styles = getSampleStyleSheet()
+    p = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+ 
+    p.drawString(70, height - 85, "Order ID: #" + order_id)
+    p.drawString(70, height - 100, "Ordered: " + order.created.strftime("%d-%m-%Y"))
+    data= [['Item', 'Book Title', 'Price (£)', 'Quantity', 'Total Price (£)']]
+    for i, order_item in enumerate(order_items):
+        data += [[str(i + 1), Paragraph(str(order_item.book.title), styles["Normal"]), order_item.price, order_item.quantity, order_item.quantity * order_item.price]]
+
+    t=Table(data, colWidths=[2*cm,7*cm,2*cm,2*cm,3*cm])
+    t.setStyle(TableStyle([('LINEABOVE', (0,0), (-1,0), 2, colors.black),
+                        ('LINEABOVE', (0,1), (-1,-1), 0.25, colors.black),
+                        ('LINEBELOW', (0,-1), (-1,-1), 2, colors.black)]))
+
+    t.wrapOn(p, width, height)
+    t.wrapOn(p, width, height)
+    t.drawOn(p, 70, height - (25 * len(order_items)) - 125)
+
+    p.showPage()
+    p.save()
+
+    pdf = buffer.getvalue()
+    buffer.close()
+    response.write(pdf)
+
+    return response
+

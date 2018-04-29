@@ -7,6 +7,6 @@
 {% block content %}
     <h1>Thank you</h1>
     <p>Your order has been successfully completed. Your order number is <strong>{{ order.id }}</strong>.</p>
-    <p>Product damaged? Don't like the product? Use our <a href="{% url "order:order_pdf" order_id=order.id %}">Return Shipping Label</a> to return this order. You can find this again on your previous orders page.</p>
+    <p>Product damaged? Don't like the product? Use our <a href="{% url "order:shipping_pdf" order_id=order.id %}">Return Shipping Label</a> to return this order. You can also see your <a href="{% url "order:invoice_pdf" order_id=order.id %}">invoice here</a>. You can find these again on your previous orders page.</p>
     
 {% endblock %}

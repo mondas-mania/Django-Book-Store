@@ -15,7 +15,8 @@
                     <ul>- {{ order_info.book.title }} x {{ order_info.quantity }}</ul>
                 {% endif %}
             {% endfor %}
-            <a href="{% url "order:order_pdf" order_id=order.id %}"><ul>Shipping Label</ul></a><br>
+            <a href="{% url "order:shipping_pdf" order_id=order.id %}"><ul>Return Shipping Label</ul></a>
+            <a href="{% url "order:invoice_pdf" order_id=order.id %}"><ul>Electronic Invoice</ul></a><br>
         {% endfor %}
     </div>
 {% endblock %}

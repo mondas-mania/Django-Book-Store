@@ -123,6 +123,11 @@ ul.errorlist {
     overflow:auto;
 }
 
+#header img {
+    height: 150px;
+    width: 150px;
+}
+
 #subheader {
     background:#ececec;
     color:#444;
