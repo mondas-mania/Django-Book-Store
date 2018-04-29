@@ -62,5 +62,5 @@ target/
 
 .DS_Store
 *.swp
-Include/
 django/
+Submission/
